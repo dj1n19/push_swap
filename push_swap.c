@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:14:13 by bgenie            #+#    #+#             */
-/*   Updated: 2022/06/30 18:00:55 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:33:16 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,33 @@ static int	check_nbr(char *nbr)
 	return (1);
 }
 
-static t_stack	*parse_args(char **args)
+static t_stacks	*parse_args(char **args, int argc, t_stacks *stacks)
 {
-	t_stack	*stack_a;
-	int		i;
+	int	i;
 
-	stack_a = NULL;
+	stacks = (t_stacks *) malloc(sizeof(t_stacks));
+	if (!stacks)
+		return (NULL);
+	stacks->stack_a = (int *) malloc(sizeof(int) * argc);
+	stacks->stack_b = (int *) malloc(sizeof(int) * argc);
+	if (!stacks->stack_a || !stacks->stack_b)
+	{
+		if (stacks->stack_a)
+			free(stacks->stack_a);
+		return (NULL);
+	}
 	i = 0;
+	stacks->size_a = 0;
+	stacks->size_b = 0;
 	while (*args)
 	{
 		if (!check_nbr(*args))
 			return (NULL);
-		stack_a = push_stack(stack_a, ft_atoi(*args));
-		++args;
+		stacks->stack_a[i] = ft_atoi(*args++);
+		++stacks->size_a;
+		++i;
 	}
-	return (stack_a);
+	return (stacks);
 }
 
 void	ft_error(void)
@@ -54,17 +66,40 @@ void	ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
+void	print_stacks(t_stacks *stacks)
+{
+	int	i;
+
+	i = 0;
+	if (!stacks || !stacks->stack_a || !stacks->stack_b)
+		return ;
+	ft_printf("a\tb\n");
+	ft_printf("-\t-\n");
+	while (i < stacks->size_a || i < stacks->size_b)
+	{
+		if (i < stacks->size_a)
+			ft_printf("%d\t", stacks->stack_a[i]);
+		else
+			ft_printf(" \t");
+		if (i < stacks->size_b)
+			ft_printf("%d\n", stacks->stack_b[i]);
+		else
+			ft_printf("\n");
+		++i;
+	}
+	ft_printf("~\t~\n");
+}
+
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
+	t_stacks	*stacks;
 
+	stacks = NULL;
 	if (argc < 2)
 		ft_error();
-	stack_a = parse_args(++argv);
-	if (!stack_a)
+	stacks = parse_args(++argv, argc - 1, stacks);
+	if (!stacks)
 		ft_error();
-	stack_a = radix(stack_a);
-	//ft_printf(">%d\n", stack_a->next->val);
-	print_stack(stack_a, "a");
+	stacks = sort(stacks);
 	return (0);
 }

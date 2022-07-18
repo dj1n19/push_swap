@@ -6,7 +6,7 @@
 #    By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 16:41:35 by bgenie            #+#    #+#              #
-#    Updated: 2022/06/30 15:16:00 by bgenie           ###   ########.fr        #
+#    Updated: 2022/07/18 20:23:45 by bgenie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 SRCS = 	push_swap.c \
-		stack.c \
-		swap_push.c \
-		radix.c
+		radix.c \
+		operations_1.c \
+		operations_2.c
 
 HEADERS_DIR = ./
 
@@ -34,7 +34,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@make -C $(LIB_DIR)
 	@printf "\e[33m[%s]: Compiling %s...\n\e[0m" $(NAME) $(NAME)
-	@$(CC) $(FLAGS) -I$(HEADERS_DIR) -I$(LIB_DIR) -o $(NAME) $(LIB_DIR)$(LIB) $(OBJS)
+	$(CC) $(FLAGS) -I$(HEADERS_DIR) -I$(LIB_DIR) -o $(NAME) $(LIB_DIR)$(LIB) $(OBJS)
 
 clean:
 	@make -C $(LIB_DIR) clean

@@ -6,41 +6,62 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:42:00 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/01 15:00:04 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/07/18 20:30:45 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_sort(t_stack *stack)
+static int	sort_check(int *stack, int size)
 {
-	t_stack	*next;
-
-	while (stack->next)
+	while (--size)
 	{
-		next = stack->next;
-		while (next)
-		{
-			if (stack->val > next->val)
-				return (0);
-			next = next->next;
-		}
-		stack = stack->next;
+		if ((unsigned int) *stack > (unsigned int) *(stack + 1))
+			return (0);
+		stack++;
 	}
 	return (1);
 }
 
-t_stack	*radix(t_stack *stack_a)
+static t_stacks	*subsort(t_stacks *stacks, int shift)
 {
-	while (is_sort(stack_a) == 0)
+	int	i;
+
+	i = stacks->size_a;
+	while (i--)
 	{
-		//print_stack(stack_a, "begin loop");
-		//ft_printf("cmp %d - %d\n", stack_a->val, stack_a->next->val);
-		if ((stack_a->val % 10) > (stack_a->next->val % 10))
-			stack_a = swap(stack_a);
-		//stack_a = stack_a->next;
-		stack_a = rotate(stack_a);
-		print_stack(stack_a, "end loop");
+		if ((((unsigned int) *stacks->stack_a >> shift) & 1) == 0)
+		{
+			stacks = push_b(stacks);
+		}
+		else
+			stacks = rotate_a(stacks);
 	}
-	return (stack_a);
+	return (stacks);
+}
+
+t_stacks	*sort(t_stacks *stacks)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (!sort_check(stacks->stack_a, stacks->size_a))
+	{
+		stacks = subsort(stacks, i);
+		j = stacks->size_b;
+		while (j--)
+			stacks = push_a(stacks);
+		++i;
+	}
+	stacks = rev_rotate_a(stacks);
+	if (*stacks->stack_a < 0)
+	{
+		stacks = rotate_a(stacks);
+		while (*stacks->stack_a >= 0)
+			stacks = rotate_a(stacks);
+	}
+	else
+		stacks = rotate_a(stacks);
+	return (stacks);
 }
