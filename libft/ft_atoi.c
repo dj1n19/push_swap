@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgenie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:44:30 by bgenie            #+#    #+#             */
-/*   Updated: 2022/04/11 16:19:36 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/07/26 16:04:35 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	ft_atoi(const char *str)
 		if (*str >= 48 && *str <= 57)
 			nbr *= 10;
 	}
-	if (is_neg == 1 && (-nbr) > 2147483648)
-		return (0);
-	if (is_neg == 0 && (-nbr) > 2147483647)
+	if (is_neg == 1 && -(nbr) < INT_MIN)
+		return (-1);
+	if (is_neg == 0 && nbr > INT_MAX)
 		return (-1);
 	if (is_neg == 1)
 		return (-nbr);

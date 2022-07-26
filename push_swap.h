@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 20:37:20 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/18 20:43:17 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/07/26 14:27:40 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ t_stacks	*swap_b(t_stacks *stacks);
 t_stacks	*push_a(t_stacks *stacks);
 t_stacks	*push_b(t_stacks *stacks);
 t_stacks	*sort(t_stacks *stacks);
-void		ft_error(void);
+t_stacks	*sort_small_stack(t_stacks *stacks);
+t_stacks	*parse_args(char **args, int argc, t_stacks *stacks);
+void		ft_error(t_stacks *stacks);
 void		print_stacks(t_stacks *stacks);
+int			check_double(int *stack, int size);
+int			sort_check(int *stack, int size);
 
 #endif
