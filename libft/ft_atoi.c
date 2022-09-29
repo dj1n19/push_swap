@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:44:30 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/26 16:04:35 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/09/26 21:15:12 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static const char	*ft_getsign(const char *s, int *is_neg)
 	return (s);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *res)
 {
-	long	nbr;
-	int		is_neg;
+	long long	nbr;
+	int			is_neg;
 
 	nbr = 0;
 	is_neg = 0;
@@ -50,11 +50,11 @@ int	ft_atoi(const char *str)
 		if (*str >= 48 && *str <= 57)
 			nbr *= 10;
 	}
-	if (is_neg == 1 && -(nbr) < INT_MIN)
-		return (-1);
-	if (is_neg == 0 && nbr > INT_MAX)
-		return (-1);
+	if ((is_neg == 1 && -(nbr) < INT_MIN) || (is_neg == 0 && nbr > INT_MAX))
+		return (0);
 	if (is_neg == 1)
-		return (-nbr);
-	return (nbr);
+		*res = (-nbr);
+	else
+		*res = nbr;
+	return (1);
 }

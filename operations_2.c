@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 14:37:04 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/18 20:16:42 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:15:26 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_stacks	*rotate_a(t_stacks *stacks)
 {
-	int	tmp;
-	int	i;
-	int	*save;
+	long	tmp;
+	long	*save;
+	int		i;
 
 	i = stacks->size_a;
 	if (!stacks || stacks->size_a < 2)
@@ -36,9 +36,9 @@ t_stacks	*rotate_a(t_stacks *stacks)
 
 t_stacks	*rotate_b(t_stacks *stacks)
 {
-	int	tmp;
-	int	i;
-	int	*save;
+	long	tmp;
+	long	*save;
+	int		i;
 
 	i = stacks->size_b;
 	if (!stacks || stacks->size_b < 2)
@@ -58,9 +58,9 @@ t_stacks	*rotate_b(t_stacks *stacks)
 
 t_stacks	*rev_rotate_a(t_stacks *stacks)
 {
-	int	tmp;
-	int	*save;
-	int	i;
+	long	tmp;
+	long	*save;
+	int		i;
 
 	i = stacks->size_a;
 	if (!stacks || stacks->size_a < 2)
@@ -81,9 +81,9 @@ t_stacks	*rev_rotate_a(t_stacks *stacks)
 
 t_stacks	*rev_rotate_b(t_stacks *stacks)
 {
-	int	tmp;
-	int	*save;
-	int	i;
+	long	tmp;
+	long	*save;
+	int		i;
 
 	i = stacks->size_b;
 	if (!stacks || stacks->size_b < 2)

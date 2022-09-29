@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 20:15:16 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/18 20:16:02 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:15:47 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_stacks	*swap_a(t_stacks *stacks)
 {
-	int	tmp;
+	long	tmp;
 
 	if (!stacks || stacks->size_a < 2)
 		return (stacks);
@@ -27,7 +27,7 @@ t_stacks	*swap_a(t_stacks *stacks)
 
 t_stacks	*swap_b(t_stacks *stacks)
 {
-	int	tmp;
+	long	tmp;
 
 	if (!stacks || stacks->size_b < 2)
 		return (stacks);
@@ -42,6 +42,8 @@ t_stacks	*push_a(t_stacks *stacks)
 {
 	int	i;
 
+	if (stacks->size_b < 1)
+		return (stacks);
 	i = stacks->size_a;
 	while (i > 0)
 	{
@@ -65,6 +67,8 @@ t_stacks	*push_b(t_stacks *stacks)
 {
 	int	i;
 
+	if (stacks->size_a < 1)
+		return (stacks);
 	i = stacks->size_b;
 	while (i > 0)
 	{

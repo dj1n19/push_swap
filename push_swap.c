@@ -6,7 +6,7 @@
 /*   By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:14:13 by bgenie            #+#    #+#             */
-/*   Updated: 2022/07/26 16:03:22 by bgenie           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:58:54 by bgenie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	print_stacks(t_stacks *stacks)
 	while (i < stacks->size_a || i < stacks->size_b)
 	{
 		if (i < stacks->size_a)
-			ft_printf("%d\t", stacks->stack_a[i]);
+			ft_printf("%d\t", (int)(stacks->stack_a[i]));
 		else
 			ft_printf(" \t");
 		if (i < stacks->size_b)
-			ft_printf("%d\n", stacks->stack_b[i]);
+			ft_printf("%d\n", (int)(stacks->stack_b[i]));
 		else
 			ft_printf("\n");
 		++i;
@@ -62,8 +62,8 @@ int	main(int argc, char **argv)
 	t_stacks	*stacks;
 
 	stacks = NULL;
-	if (argc < 1)
-		ft_error(stacks);
+	if (argc < 2)
+		return (0);
 	if (argc == 2)
 		stacks = parse_args(ft_split(argv[1], ' '), ft_strlen(argv[1]), stacks);
 	else
@@ -72,7 +72,13 @@ int	main(int argc, char **argv)
 		ft_error(stacks);
 	if (!check_double(stacks->stack_a, stacks->size_a))
 		ft_error(stacks);
-	if (stacks->size_a > 5)
+	if (stacks->size_a == 2 && !sort_check(stacks->stack_a, stacks->size_a))
+		stacks = swap_a(stacks);
+	if (stacks->size_a == 2)
+		return (0);
+	if (stacks->size_a == 3)
+		stacks = sort_tiny_stack(stacks);
+	else if (stacks->size_a > 5)
 		stacks = sort(stacks);
 	else
 		stacks = sort_small_stack(stacks);

@@ -6,7 +6,7 @@
 #    By: bgenie <bgenie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/29 16:41:35 by bgenie            #+#    #+#              #
-#    Updated: 2022/07/26 12:23:53 by bgenie           ###   ########.fr        #
+#    Updated: 2022/09/30 00:03:25 by bgenie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS = 	push_swap.c \
 		radix.c \
+		sort.c \
 		operations_1.c \
 		operations_2.c \
 		check.c
